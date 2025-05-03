@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Language Test</title>
+</head>
+<body>
+<div class="container">
+    <h1>Choose Language and Level</h1>
+    <form action="/test" method="post">
+        <label for="language">Language:</label>
+        <select name="language">
+            <option value="English">English</option>
+            <option value="German">German</option>
+            <option value="French">French</option>
+        </select><br><br>
+
+        <label for="level">Level:</label>
+        <select name="level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+        </select><br><br>
+
+        <button type="submit">Start Test</button>
+    </form>
+</div>
+</body>
+</html>

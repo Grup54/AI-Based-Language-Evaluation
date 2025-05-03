@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .result {
+            font-size: 24px;
+            text-align: center;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .question-answer {
+    margin-bottom: 20px;
+}
+
+.question-answer p {
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+span {
+    font-weight: bold;
+}
+
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{{ language }} - {{ level }} Test Result</h1>
+    <div class="result">
+      <p>You scored {{ score }} out of {{ total }}!</p>
+    </div>
+
+    <!-- Displaying the questions, user answers, and correct answers -->
+    <div class="questions-answers">
+      {% for q in question_answer_data %}
+      <div class="question-answer">
+        <p><strong>{{ loop.index }}. {{ q['question'] }}</strong></p>
+        <ul>
+          {% for option in q['options'] %}
+          <li>
+            {% if q['user_answer'] == option %}
+              <input type="radio" disabled="disabled" checked="checked" />
+            {% else %}
+              <input type="radio" disabled="disabled" />
+            {% endif %}
+            {{ option }}
+
+            <!-- Show tick if this option is correct -->
+            {% if option == q['correct_answer'] %}
+              <span style="color: green;">✔</span>
+            {% endif %}
+
+            <!-- Show cross if this is user's wrong answer -->
+            {% if q['user_answer'] == option and q['user_answer'] != q['correct_answer'] %}
+              <span style="color: red;">✖</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+    <form action="/test" method="post">
+      <input type="hidden" name="language" value="{{ language }}">
+      <input type="hidden" name="level" value="{{ level }}">
+      <button type="submit" class="btn">Retake Test</button>
+    </form>
+
+    <form action="/personalized_test" method="get">
+      <button type="submit" class="btn">Personalized Test</button>
+    </form>
+  </div>
+</body>
+
+
+</html>

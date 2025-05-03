@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+        }
+        .options label {
+            font-size: 16px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ level }} - {{ language }} Language Test</h1>
+        <form action="/submit_test" method="POST">
+    {% for question in questions %}
+        {% set qid = 'q' + loop.index0|string %}
+        <div class="question">
+            <p><strong>Q{{ loop.index }}:</strong> {{ question['question'] }}</p>
+            <input type="hidden" name="{{ qid }}_text" value="{{ question['question'] }}">
+            <ul class="options">
+                {% for option in question['options'] %}
+                    <li>
+                        <input
+                            type="radio"
+                            name="{{ qid }}"
+                            value="{{ option }}"
+                            id="{{ qid }}_option{{ loop.index }}"
+                            required
+                        >
+                        <label for="{{ qid }}_option{{ loop.index }}">{{ option }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <!-- 🔒 Gizli doğru cevapları burada taşıyoruz -->
+    {% for i in range(15) %}
+      <input type="hidden" name="correct_q{{ i+1 }}" value="{{ questions[i]['correct_answer'] }}">
+    {% endfor %}
+
+    <button type="submit" class="btn">Submit Test</button>
+</form>
+
+    </div>
+</body>
+
+
+
+</html>
