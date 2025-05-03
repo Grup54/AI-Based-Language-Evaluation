@@ -24,8 +24,10 @@ build/
 .DS_Store
 Thumbs.db
 
-# Conflict files
-.idea
-__pycache__
-routers/__pycache__
-services/__pycache__
+.idea/
+__pycache__/
+*.pyc
+/env
+/venv
+routers/__pycache__/
+/services/__pycache__/
