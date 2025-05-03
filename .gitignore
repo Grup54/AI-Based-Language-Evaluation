@@ -23,3 +23,9 @@ build/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Conflict files
+.idea
+__pycache__
+routers/__pycache__
+services/__pycache__
