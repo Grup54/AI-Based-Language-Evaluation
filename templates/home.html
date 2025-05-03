@@ -6,27 +6,72 @@
 </head>
 <body>
 <div class="container">
-    <h1>Choose Language and Level</h1>
+    <h1>Choose Language & Level</h1>
     <form action="/test" method="post">
-        <label for="language">Language:</label>
-        <select name="language">
-            <option value="English">English</option>
-            <option value="German">German</option>
-            <option value="French">French</option>
-        </select><br><br>
+        <input type="hidden" name="language" id="selected-language">
+        <input type="hidden" name="level" id="selected-level">
 
-        <label for="level">Level:</label>
-        <select name="level">
-            <option value="A1">A1</option>
-            <option value="A2">A2</option>
-            <option value="B1">B1</option>
-            <option value="B2">B2</option>
-            <option value="C1">C1</option>
-            <option value="C2">C2</option>
-        </select><br><br>
+        <div class="language-cards">
+            <div class="language-card" data-lang="English">
+                <img src="https://flagcdn.com/gb.svg" alt="English Flag">
+                <p>English</p>
+            </div>
+            <div class="language-card" data-lang="German">
+                <img src="https://flagcdn.com/de.svg" alt="German Flag">
+                <p>German</p>
+            </div>
+            <div class="language-card" data-lang="French">
+                <img src="https://flagcdn.com/fr.svg" alt="French Flag">
+                <p>French</p>
+            </div>
+        </div>
+
+        <div id="level-section" class="fade-section">
+            <label class="level-label">~Select Level~</label>
+            <div class="level-cards">
+                <div class="level-card" data-level="A1">A1</div>
+                <div class="level-card" data-level="A2">A2</div>
+                <div class="level-card" data-level="B1">B1</div>
+                <div class="level-card" data-level="B2">B2</div>
+                <div class="level-card" data-level="C1">C1</div>
+                <div class="level-card" data-level="C2">C2</div>
+            </div>
+        </div>
 
         <button type="submit">Start Test</button>
     </form>
 </div>
+
+<script>
+    const cards = document.querySelectorAll(".language-card");
+    const levelCards = document.querySelectorAll(".level-card");
+    const hiddenLang = document.getElementById("selected-language");
+    const hiddenLevel = document.getElementById("selected-level");
+    const levelSection = document.getElementById("level-section");
+
+
+    levelSection.style.display = "none";
+
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+            cards.forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+            hiddenLang.value = card.getAttribute("data-lang");
+
+            levelSection.style.display = "block";
+            setTimeout(() => {
+                levelSection.classList.add("visible");
+            }, 10);
+        });
+    });
+
+    levelCards.forEach(card => {
+        card.addEventListener("click", () => {
+            levelCards.forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+            hiddenLevel.value = card.getAttribute("data-level");
+        });
+    });
+</script>
 </body>
 </html>
