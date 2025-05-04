@@ -23,6 +23,7 @@ run.bat
 
 # macOS / Linux kullanıcıları için:
 ./run.sh
+```
 
 ## 🖼️ Örnek Arayüz
 
