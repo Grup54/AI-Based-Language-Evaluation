@@ -16,9 +16,8 @@
    ```bash
    git clone https://github.com/Grup54/AI-Based-Language-Evaluation.git
    cd AI-Based-Language-Evaluation
-
-2. Çalıştırın:
-
+2.Projeyi çalıştırın:
+```bash
 # Windows kullanıcıları için:
 run.bat
 
